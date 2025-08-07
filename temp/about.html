@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+{% block title %}À propos{% endblock %}
+
+{% block content %}
+<nav class="fixed top-0 left-0 w-full bg-black bg-opacity-60 backdrop-blur-md z-50 py-4">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <h1 class="text-lg font-bold">Portfolio</h1>
+      <ul class="flex space-x-6 text-sm md:text-base">
+       
+        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
+        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
+        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
+        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
+       
+      </ul>
+    </div>
+  </nav>
+<section class="min-h-screen flex flex-col justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 px-6 md:px-20 py-32 relative overflow-hidden">
+
+  <div class="max-w-7xl mx-auto w-full relative z-10">
+
+    <!-- Titre -->
+    <header class="mb-20 text-center max-w-3xl mx-auto">
+      <h1 class="text-5xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-green-500 to-green-600 drop-shadow-lg animate-textGlow">
+        À propos de moi
+      </h1>
+      <p class="text-gray-300 text-lg leading-relaxed max-w-xl mx-auto tracking-wide drop-shadow-md">
+        Étudiant en Génie Logiciel, passionné par la technologie, la musique et le sport.
+      </p>
+    </header>
+
+    <!-- Présentation avec image -->
+    <div class="flex flex-col md:flex-row md:items-center gap-20 max-w-5xl mx-auto">
+      <!-- Image -->
+      <div class="flex-1 rounded-3xl overflow-hidden shadow-2xl ring-2 ring-green-500 ring-opacity-60 hover:scale-105 transform transition duration-500">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Photo professionnelle" class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Texte -->
+      <div class="flex-1 space-y-6">
+        <h2 class="text-3xl font-semibold text-green-400 tracking-wide drop-shadow-md animate-fadeInLeft">
+          MEDONJIO TENANG JODEANAS
+        </h2>
+        <p class="text-gray-300 text-lg leading-relaxed tracking-wide drop-shadow-sm animate-fadeInLeft delay-100">
+          Je suis actuellement en <strong>première année de Génie Logiciel</strong> à l'<strong>Institut Universitaire Fotso Victor de Bandjoun</strong>.
+        </p>
+        <p class="text-gray-400 text-base leading-relaxed tracking-wide drop-shadow-sm animate-fadeInLeft delay-200">
+          J'ai effectué mes études secondaires au <strong>Lycée Classique de Bafoussam</strong> entre <strong>2017 et 2024</strong>.
+        </p>
+        <p class="text-gray-400 text-base leading-relaxed tracking-wide drop-shadow-sm animate-fadeInLeft delay-300">
+          En dehors du développement, j’aime <strong>chanter</strong>, jouer au <strong>basketball</strong> et explorer de nouvelles technologies.
+        </p>
+      </div>
+    </div>
+
+    <!-- Compétences -->
+    <section class="mt-32 max-w-5xl mx-auto">
+      <h3 class="text-4xl font-semibold mb-12 text-center text-green-400 tracking-wide drop-shadow-lg animate-textGlow">
+        Compétences clés
+      </h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+        <div class="py-6 bg-gray-800 rounded-2xl shadow-lg hover:bg-green-600 hover:text-white transition cursor-default select-none text-lg font-medium animate-scaleUp">
+          HTML / CSS
+        </div>
+        <div class="py-6 bg-gray-800 rounded-2xl shadow-lg hover:bg-green-600 hover:text-white transition cursor-default select-none text-lg font-medium animate-scaleUp delay-100">
+          Tailwind CSS
+        </div>
+        <div class="py-6 bg-gray-800 rounded-2xl shadow-lg hover:bg-green-600 hover:text-white transition cursor-default select-none text-lg font-medium animate-scaleUp delay-200">
+          Python / Django
+        </div>
+        <div class="py-6 bg-gray-800 rounded-2xl shadow-lg hover:bg-green-600 hover:text-white transition cursor-default select-none text-lg font-medium animate-scaleUp delay-300">
+          Git / GitHub
+        </div>
+      </div>
+    </section>
+
+    <!-- Valeurs -->
+    <section class="mt-32 max-w-5xl mx-auto">
+      <h3 class="text-4xl font-semibold mb-12 text-center text-green-400 tracking-wide drop-shadow-lg animate-textGlow">
+        Mes valeurs
+      </h3>
+      <div class="grid md:grid-cols-3 gap-16">
+        <div class="bg-gray-800 rounded-3xl p-10 shadow-xl hover:ring-4 hover:ring-green-400 transition animate-slideUp">
+          <h4 class="text-xl font-bold mb-4 text-white">Esprit d'équipe</h4>
+          <p class="text-gray-300 leading-relaxed">
+            J’aime collaborer avec d’autres pour développer des projets solides et innovants.
+          </p>
+        </div>
+        <div class="bg-gray-800 rounded-3xl p-10 shadow-xl hover:ring-4 hover:ring-green-400 transition animate-slideUp delay-100">
+          <h4 class="text-xl font-bold mb-4 text-white">Autonomie</h4>
+          <p class="text-gray-300 leading-relaxed">
+            Je suis capable d’apprendre seul grâce à des projets, des tutoriels et des recherches.
+          </p>
+        </div>
+        <div class="bg-gray-800 rounded-3xl p-10 shadow-xl hover:ring-4 hover:ring-green-400 transition animate-slideUp delay-200">
+          <h4 class="text-xl font-bold mb-4 text-white">Créativité</h4>
+          <p class="text-gray-300 leading-relaxed">
+            J’aime créer des interfaces propres, accessibles et esthétiques pour tous les utilisateurs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Petite image discrète en bas -->
+    <div class="mt-24 flex justify-center opacity-10 pointer-events-none select-none">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Example.svg/120px-Example.svg.png" alt="Logo discret" class="w-24 h-auto" />
+    </div>
+
+  </div>
+</section>
+
+<footer class="bg-gray-800 text-gray-300 pt-12 pb-8">
+  <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    
+    <!-- Colonne 1 : Nom + description -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">MEDONJIO TENANG JODEANAS</h2>
+      <p class="text-sm">
+        Développeur web passionné par la création d’expériences digitales modernes, performantes et intuitives. 
+        Basé à Bafoussam, je transforme des idées en produits concrets.
+      </p>
+    </div>
+
+    <!-- Colonne 2 : Contact -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">Contact</h2>
+      <ul class="space-y-2 text-sm">
+        <li class="flex items-center gap-2">
+          <i class="fas fa-map-marker-alt text-green-400"></i>
+          Banengo II, Bafoussam, Cameroun
+        </li>
+        <li class="flex items-center gap-2">
+          <i class="fas fa-envelope text-green-400"></i>
+          <a href="mailto:medonjiojoddeanas@gmail.com" class="hover:underline">medonjiojoddeanas@gmail.com</a>
+        </li>
+        <li class="flex items-center gap-2">
+          <i class="fas fa-phone text-green-400"></i>
+          <a href="tel:+237679590426" class="hover:underline">+237 679 590 426</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Colonne 3 : Navigation -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">Navigation</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
+        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
+        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
+        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Colonne 4 : Suivez-moi -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">Suivez-moi</h2>
+      <div class="flex space-x-4">
+        <a href="https://www.linkedin.com/in/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://facebook.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bas du footer -->
+  <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+    &copy; 2025 MEDONJIO TENANG JODEANAS — Tous droits réservés.
+  </div>
+</footer>
+
+<!-- Animations CSS -->
+<style>
+  @keyframes textGlow {
+    0%, 100% {
+      text-shadow:
+        0 0 8px #22c55e,
+        0 0 20px #22c55e,
+        0 0 30px #16a34a;
+    }
+    50% {
+      text-shadow:
+        0 0 12px #4ade80,
+        0 0 25px #4ade80,
+        0 0 40px #22c55e;
+    }
+  }
+
+  .animate-textGlow {
+    animation: textGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fadeInLeft {
+    animation: fadeInLeft 1s forwards;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes scaleUp {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-scaleUp {
+    animation: scaleUp 0.5s ease forwards;
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.8s ease forwards;
+  }
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+</style>
+
+<script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out both;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #10B981, #3B82F6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-animated {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-animated::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: skewX(-20deg);
+      transition: left 0.4s ease;
+    }
+
+    .btn-animated:hover::after {
+      left: 100%;
+    }
+  </style>
+{% endblock %}
+
+
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>contact</title>
+    </head>
+    <body>
+  
+{% block content %}
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+ <nav class="fixed top-0 left-0 w-full bg-black bg-opacity-60 backdrop-blur-md z-50 py-4">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <h1 class="text-lg font-bold">Portfolio</h1>
+      <ul class="flex space-x-6 text-sm md:text-base">
+       
+        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
+        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
+        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
+        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
+       
+      </ul>
+    </div>
+  </nav>
+
+<section id="contact" class="min-h-screen flex items-center bg-gradient-to-br from-blue-900 via-gray-900 to-black py-20 px-6">
+  <div class="max-w-4xl w-full mx-auto bg-white rounded-3xl shadow-2xl p-12 md:p-16">
+    <h2 class="text-5xl font-extrabold text-center text-gray-900 mb-10 tracking-wide drop-shadow-md">
+      Contactez-moi
+    </h2>
+
+    <p class="text-center text-gray-700 text-lg mb-12 max-w-xl mx-auto leading-relaxed">
+      Une idée de projet ? Une collaboration ? Envoyez-moi un message, je vous répondrai rapidement !
+    </p>
+
+    <form action="#" method="post" class="space-y-8">
+      {% csrf_token %}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Nom -->
+        <div>
+          <label for="name" class="flex items-center mb-3 text-sm font-semibold text-gray-800 space-x-2">
+            <!-- Icon user -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 1118.878 6.196 9 9 0 015.12 17.804z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>Nom</span>
+          </label>
+          <input type="text" id="name" name="name" required
+                 class="w-full p-5 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-4 focus:ring-blue-500 transition" />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="flex items-center mb-3 text-sm font-semibold text-gray-800 space-x-2">
+            <!-- Icon mail -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 12H8m8 0l-4-4m0 8l4-4m-4-8v16" />
+            </svg>
+            <span>Email</span>
+          </label>
+          <input type="email" id="email" name="email" required
+                 class="w-full p-5 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-4 focus:ring-blue-500 transition" />
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label for="message" class="flex items-center mb-3 text-sm font-semibold text-gray-800 space-x-2">
+          <!-- Icon chat/message -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-5-5H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v6a2 2 0 01-2 2h-3l-5 5z" />
+          </svg>
+          <span>Message</span>
+        </label>
+        <textarea id="message" name="message" rows="6" required
+                  class="w-full p-5 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-4 focus:ring-blue-500 transition"></textarea>
+      </div>
+
+      <div class="text-center">
+        <button type="submit"
+                class="bg-blue-600 text-white font-bold text-xl px-12 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition duration-300">
+          Envoyer le message
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+<footer class="bg-gray-800 text-gray-300 pt-12 pb-8">
+  <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    
+    <!-- Colonne 1 : Nom + description -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">MEDONJIO TENANG JODEANAS</h2>
+      <p class="text-sm">
+        Développeur web passionné par la création d’expériences digitales modernes, performantes et intuitives. 
+        Basé à Bafoussam, je transforme des idées en produits concrets.
+      </p>
+    </div>
+
+    <!-- Colonne 2 : Contact -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">Contact</h2>
+      <ul class="space-y-2 text-sm">
+        <li class="flex items-center gap-2">
+          <i class="fas fa-map-marker-alt text-green-400"></i>
+          Banengo II, Bafoussam, Cameroun
+        </li>
+        <li class="flex items-center gap-2">
+          <i class="fas fa-envelope text-green-400"></i>
+          <a href="mailto:medonjiojoddeanas@gmail.com" class="hover:underline">medonjiojoddeanas@gmail.com</a>
+        </li>
+        <li class="flex items-center gap-2">
+          <i class="fas fa-phone text-green-400"></i>
+          <a href="tel:+237679590426" class="hover:underline">+237 679 590 426</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Colonne 3 : Navigation -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">Navigation</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
+        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
+        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
+        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Colonne 4 : Suivez-moi -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-4">Suivez-moi</h2>
+      <div class="flex space-x-4">
+        <a href="https://www.linkedin.com/in/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://facebook.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bas du footer -->
+  <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+    &copy; 2025 MEDONJIO TENANG JODEANAS — Tous droits réservés.
+  </div>
+    
+</footer>
+
+<!-- Animations CSS -->
+<style>
+  @keyframes textGlow {
+    0%, 100% {
+      text-shadow:
+        0 0 8px #22c55e,
+        0 0 20px #22c55e,
+        0 0 30px #16a34a;
+    }
+    50% {
+      text-shadow:
+        0 0 12px #4ade80,
+        0 0 25px #4ade80,
+        0 0 40px #22c55e;
+    }
+  }
+
+  .animate-textGlow {
+    animation: textGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fadeInLeft {
+    animation: fadeInLeft 1s forwards;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes scaleUp {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-scaleUp {
+    animation: scaleUp 0.5s ease forwards;
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.8s ease forwards;
+  }
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+</style>
+
+<script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1.2s ease-out both;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #10B981, #3B82F6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-animated {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-animated::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: skewX(-20deg);
+      transition: left 0.4s ease;
+    }
+
+    .btn-animated:hover::after {
+      left: 100%;
+    }
+  </style>
+{% endblock %}
+    </body>
+    </html>
