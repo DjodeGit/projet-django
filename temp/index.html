@@ -1,162 +1,113 @@
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio | {% block title %}Accueil{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+{% block title %}Accueil{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hero section - Fix blurry background */
+    .hero-section {
+        min-height: calc(100vh - 4rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(17, 24, 39, 0.4), rgba(31, 41, 55, 0.3)), 
+                    url('https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1920&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
-
-    .fade-in-up {
-      animation: fadeInUp 1.2s ease-out both;
-    }
-
-    .gradient-text {
-      background: linear-gradient(to right, #10B981, #3B82F6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .btn-animated {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-animated::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: skewX(-20deg);
-      transition: left 0.4s ease;
-    }
-
-    .btn-animated:hover::after {
-      left: 100%;
-    }
-  </style>
-</head>
-<body class="bg-gray-900 text-white">
-
-  <!-- Navigation sticky -->
-  <nav class="fixed top-0 left-0 w-full bg-black bg-opacity-60 backdrop-blur-md z-50 py-4">
-    <div class="container mx-auto flex justify-between items-center px-6">
-      <h1 class="text-lg font-bold">Portfolio</h1>
-      <ul class="flex space-x-6 text-sm md:text-base">
-        {% block content %}
-        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
-        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
-        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
-        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
-        {% endblock %}
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Accueil - Hero -->
-  <header class="min-h-screen bg-cover bg-center flex items-center justify-center pt-24"
-          style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1920&q=80'); background-blend-mode: overlay;">
-    <div class="text-center max-w-3xl p-10 md:p-16 bg-black bg-opacity-50 rounded-xl backdrop-blur-sm fade-in-up">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text animate-pulse">
-        Bienvenue
-      </h1>
-      <p class="text-lg md:text-xl leading-relaxed text-gray-200">
-        Je suis <span class="text-green-400 font-semibold">MEDONJIO TENANG JODEANAS</span>, un développeur web passionné basé à Bafoussam.<br>
-        J'aime transformer des idées en expériences digitales modernes, intuitives et immersives.
-      </p>
-      <div class="mt-10 flex flex-wrap justify-center gap-4">
-        <a href="{% url 'about' %}" class="px-6 py-3 bg-green-500 hover:bg-green-600 rounded-lg transition btn-animated">À propos</a>
-        <a href="{% url 'projet' %}" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition btn-animated">Projets</a>
-        <a href="{% url 'contact' %}" class="px-6 py-3 bg-gray-700 hover:bg-gray-800 rounded-lg transition btn-animated">Contact</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Footer -->
-<footer class="bg-gray-800 text-gray-300 pt-12 pb-8">
-  <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
     
-    <!-- Colonne 1 : Nom + description -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">MEDONJIO TENANG JODEANAS</h2>
-      <p class="text-sm">
-        Développeur web passionné par la création d’expériences digitales modernes, performantes et intuitives. 
-        Basé à Bafoussam, je transforme des idées en produits concrets.
-      </p>
+    /* Professional hero content box */
+    .hero-content {
+        max-width: 48rem;
+        margin: 0 auto;
+        text-align: center;
+        padding: 3.5rem 2rem;
+        background: linear-gradient(145deg, rgba(17, 24, 39, 0.85), rgba(31, 41, 55, 0.75));
+        border-radius: 1.5rem;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(74, 222, 128, 0.2);
+        box-shadow: 
+            0 25px 50px -12px rgba(0, 0, 0, 0.5),
+            0 0 0 1px rgba(255, 255, 255, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    /* Gradient text for title */
+    .gradient-text {
+        background: linear-gradient(135deg, #10B981, #3B82F6, #8B5CF6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-content {
+            padding: 2rem 1.5rem;
+            margin: 1rem;
+            border-radius: 1rem;
+        }
+        
+        .hero-section {
+            background-attachment: scroll;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section relative overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-[20%] -left-[10%] w-[500px] h-[500px] bg-green-500/10 rounded-full blur-[100px]"></div>
+        <div class="absolute -bottom-[20%] -right-[10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+        <div class="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px]"></div>
     </div>
 
-    <!-- Colonne 2 : Contact -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">Contact</h2>
-      <ul class="space-y-2 text-sm">
-        <li class="flex items-center gap-2">
-          <i class="fas fa-map-marker-alt text-green-400"></i>
-          Banengo II, Bafoussam, Cameroun
-        </li>
-        <li class="flex items-center gap-2">
-          <i class="fas fa-envelope text-green-400"></i>
-          <a href="mailto:medonjiojoddeanas@gmail.com" class="hover:underline">medonjiojoddeanas@gmail.com</a>
-        </li>
-        <li class="flex items-center gap-2">
-          <i class="fas fa-phone text-green-400"></i>
-          <a href="tel:+237679590426" class="hover:underline">+237 679 590 426</a>
-        </li>
-      </ul>
+    <!-- Content -->
+    <div class="hero-content relative z-10">
+        <!-- Animated badge -->
+        <span class="inline-flex items-center px-4 py-1.5 bg-green-500/20 border border-green-500/30 rounded-full text-sm font-medium text-green-400 mb-8 animate-fade-in-up">
+            <i class="fas fa-code mr-2"></i>Développeur Web
+        </span>
+
+        <!-- Main heading -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <span class="gradient-text">Bienvenue sur mon</span><br>
+            <span class="text-white mt-2 inline-block">Portfolio</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl text-gray-300 mt-6 leading-relaxed max-w-xl mx-auto">
+            Je suis <span class="text-green-400 font-semibold">MEDONJIO TENANG JODEANAS</span>, un développeur web passionné basé à Bafoussam.<br class="hidden sm:block">
+            J'aime transformer des idées en expériences digitales modernes, intuitives et immersives.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+            <a href="{% url 'about' %}" class="group btn-animated inline-flex items-center px-7 py-3.5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-emerald-600 hover:to-teal-600 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                <i class="fas fa-user mr-2 group-hover:scale-110 transition-transform"></i>
+                À propos
+            </a>
+            <a href="{% url 'projet' %}" class="group btn-animated inline-flex items-center px-7 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-600 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                <i class="fas fa-code mr-2 group-hover:scale-110 transition-transform"></i>
+                Projets
+            </a>
+            <a href="{% url 'contact' %}" class="group btn-animated inline-flex items-center px-7 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 hover:-translate-y-1">
+                <i class="fas fa-envelope mr-2 group-hover:scale-110 transition-transform"></i>
+                Contact
+            </a>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="mt-12 animate-bounce hidden sm:block">
+            <a href="#about" class="inline-flex items-center text-gray-400 hover:text-green-400 transition-colors">
+                <span class="mr-2 text-sm">Découvrir</span>
+                <i class="fas fa-chevron-down text-lg"></i>
+            </a>
+        </div>
     </div>
-
-    <!-- Colonne 3 : Navigation -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">Navigation</h2>
-      <ul class="space-y-2 text-sm">
-        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
-        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
-        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
-        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- Colonne 4 : Suivez-moi -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">Suivez-moi</h2>
-      <div class="flex space-x-4">
-        <a href="https://www.linkedin.com/in/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://twitter.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://facebook.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Bas du footer -->
-  <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-    &copy; 2025 MEDONJIO TENANG JODEANAS — Tous droits réservés.
-  </div>
-</footer>
-
-</body>
-</html>
+</section>
+{% endblock %}
