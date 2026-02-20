@@ -106,7 +106,16 @@ else:
 #            'NAME': BASE_DIR / 'db.sqlite3',
 #        }
 #    }
-
+#DATABASES = {
+#   'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'gestion_poulets_chaire',
+#        'USER': 'gestion_poulets_chaire_user',
+#        'PASSWORD': 'ton_mot_de_passe',
+#        'HOST': 'dpg-d69clacr85hc73d950jg-a.oregon-postgres.render.com',
+#        'PORT': '',  # laisse vide si c'est le port par défaut
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
