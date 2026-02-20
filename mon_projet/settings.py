@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =config ('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -61,7 +61,7 @@ ROOT_URLCONF = 'mon_projet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR /'temp')],
+        'DIRS': [os.path.join(BASE_DIR, 'temp')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,16 +79,12 @@ WSGI_APPLICATION = 'mon_projet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#       'ENGINE': 'django.db.backends.sqlite3',
-#       'NAME': BASE_DIR / 'db.sqlite3',
-#   }
-#}
-DATABASE ={
-    'default':dj_database_url.parse(config('DATABASE_URL'))
-
-    
+# SQLite pour développement local (force SQLite)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -126,20 +122,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'projetdb',
-        'USER': 'postgres',
-        'PASSWORD': 'JODEANAS',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@example.com')
+
+# Media files (Images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Site URL - À remplacer par votre URL en production
+#SITE_URL = 'https://jodeanas-portfolio.onrender.com'
