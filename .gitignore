@@ -1,2 +1,9 @@
 node_modules/
 virtuel/
+.env
+*.pyc
+__pycache__/
+db.sqlite3
+staticfiles/
+media/
+.pytest_cache/
