@@ -1,0 +1,445 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de MEDONJIO TENANG JODEANAS - Développeur Web basé à Bafoussam">
+    <meta name="keywords" content="développeur web, portfolio, Django, Python, HTML, CSS, JavaScript">
+    <meta name="author" content="MEDONJIO TENANG JODEANAS">
+    <meta name="theme-color" content="#111827">
+    
+    <title>{% block title %}Portfolio{% endblock %} | MEDONJIO TENANG JODEANAS</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Button animations */
+        .btn-animated {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-animated::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-animated:hover::before {
+            left: 100%;
+        }
+        
+        .btn-animated:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Skill card hover */
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #10B981, #059669);
+        }
+        
+        /* Mobile menu animation */
+        .mobile-menu {
+            transition: all 0.3s ease;
+            transform-origin: top;
+        }
+        
+        .mobile-menu.closed {
+            transform: scaleY(0);
+            opacity: 0;
+        }
+        
+        .mobile-menu.open {
+            transform: scaleY(1);
+            opacity: 1;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #10B981;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+        
+        /* Glass effect */
+        .glass {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Active link */
+        .nav-link-active {
+            color: #10B981;
+            position: relative;
+        }
+        
+        .nav-link-active::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #10B981;
+            border-radius: 2px;
+        }
+        
+        /* Delay classes */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gray-900 text-white antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full h-16 z-50 glass border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between items-center h-full">
+                <!-- Logo -->
+                <a href="{% url 'index' %}" class="flex items-center space-x-2">
+                    <span class="text-xl font-bold gradient-text">Portfolio</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'index' %}" class="nav-link {% if request.path == '/' %}nav-link-active{% endif %} hover:text-green-400 transition-colors duration-300 text-sm font-medium">
+                        <i class="fas fa-home mr-2"></i>Accueil
+                    </a>
+                    <a href="{% url 'about' %}" class="nav-link {% if request.path == '/about/' %}nav-link-active{% endif %} hover:text-green-400 transition-colors duration-300 text-sm font-medium">
+                        <i class="fas fa-user mr-2"></i>À propos
+                    </a>
+                    <a href="{% url 'projet' %}" class="nav-link {% if request.path == '/projet/' or request.path == '/projets/' %}nav-link-active{% endif %} hover:text-green-400 transition-colors duration-300 text-sm font-medium">
+                        <i class="fas fa-code mr-2"></i>Projets
+                    </a>
+                    <a href="{% url 'contact' %}" class="nav-link {% if request.path == '/contact/' %}nav-link-active{% endif %} hover:text-green-400 transition-colors duration-300 text-sm font-medium">
+                        <i class="fas fa-envelope mr-2"></i>Contact
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors" aria-label="Menu">
+                    <i class="fas fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden closed mobile-menu bg-gray-900 border-t border-gray-800">
+            <div class="px-4 py-4 space-y-3">
+                <a href="{% url 'index' %}" class="block px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors {% if request.path == '/' %}bg-gray-800 text-green-400{% endif %}">
+                    <i class="fas fa-home mr-3"></i>Accueil
+                </a>
+                <a href="{% url 'about' %}" class="block px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors {% if request.path == '/about/' %}bg-gray-800 text-green-400{% endif %}">
+                    <i class="fas fa-user mr-3"></i>À propos
+                </a>
+                <a href="{% url 'projet' %}" class="block px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors {% if request.path == '/projet/' or request.path == '/projets/' %}bg-gray-800 text-green-400{% endif %}">
+                    <i class="fas fa-code mr-3"></i>Projets
+                </a>
+                <a href="{% url 'contact' %}" class="block px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors {% if request.path == '/contact/' %}bg-gray-800 text-green-400{% endif %}">
+                    <i class="fas fa-envelope mr-3"></i>Contact
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Colonne 1: À propos -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-white flex items-center">
+                        <i class="fas fa-code mr-2 text-green-400"></i>
+                        Développeur Web
+                    </h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Développeur web passionné par la création d'expériences digitales modernes, performantes et intuitives.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/jodeanas-medonjio-tenang/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/DjodeGit" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/tonprofil" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61554734305582" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Colonne 2: Liens rapides -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-white">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="{% url 'index' %}" class="text-gray-400 hover:text-green-400 transition-colors flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2"></i>Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'about' %}" class="text-gray-400 hover:text-green-400 transition-colors flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2"></i>À propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'projet' %}" class="text-gray-400 hover:text-green-400 transition-colors flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2"></i>Projets
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'contact' %}" class="text-gray-400 hover:text-green-400 transition-colors flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2"></i>Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Colonne 3: Contact -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-white">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-green-400 mt-1 mr-3"></i>
+                            <span class="text-sm text-gray-400">Banengo II, Bafoussam, Cameroun</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-green-400 mr-3"></i>
+                            <a href="mailto:medonjiojoddeanas@gmail.com" class="text-sm text-gray-400 hover:text-green-400 transition-colors">
+                                medonjiojodeanas@gmail.com
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-green-400 mr-3"></i>
+                            <a href="tel:+237679590426" class="text-sm text-gray-400 hover:text-green-400 transition-colors">
+                                +237 679 590 426
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Colonne 4: Newsletter -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-white">Newsletter</h3>
+                    <p class="text-sm text-gray-400">Abonnez-vous pour recevoir mes dernières actualités.</p>
+                    <form id="newsletter-form" class="flex flex-col space-y-2">
+                        <input type="email" id="newsletter-email" name="email" placeholder="Votre email" required class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-sm transition-colors">
+                        <button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors text-sm font-medium">
+                            <i class="fas fa-paper-plane mr-2"></i>S'abonner
+                        </button>
+                    </form>
+                    <div id="newsletter-message" class="text-sm hidden"></div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-sm text-gray-500">
+                    © 2025 <span class="text-green-400 font-medium">MEDONJIO TENANG JODEANAS</span>. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('closed');
+            mobileMenu.classList.toggle('open');
+            
+            if (mobileMenu.classList.contains('open')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileMenu.classList.add('closed');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+        
+        // Newsletter subscription
+        const newsletterForm = document.getElementById('newsletter-form');
+        const newsletterMessage = document.getElementById('newsletter-message');
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('newsletter-email').value;
+                const formData = new FormData();
+                formData.append('email', email);
+                
+                try {
+                    const response = await fetch('/subscribe/', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken')
+                        }
+                    });
+                    const data = await response.json();
+                    newsletterMessage.classList.remove('hidden');
+                    newsletterMessage.textContent = data.message;
+                    newsletterMessage.className = 'text-sm mt-2 ' + (data.success ? 'text-green-400' : 'text-red-400');
+                    if (data.success) {
+                        newsletterForm.reset();
+                    }
+                } catch (error) {
+                    newsletterMessage.classList.remove('hidden');
+                    newsletterMessage.textContent = 'Une erreur est survenue. Veuillez réessayer.';
+                    newsletterMessage.className = 'text-sm mt-2 text-red-400';
+                }
+            });
+        }
+        
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
