@@ -82,19 +82,30 @@ WSGI_APPLICATION = 'mon_projet.wsgi.application'
 # SQLite pour développement local (force SQLite)
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-if DATABASE_URL:
-    # Production (Render → PostgreSQL)
+if DATABASE_URL and DATABASE_URL.startswith("postgres"):
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
+        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
 else:
-    # Local (SQLite)
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+#if DATABASE_URL:
+    # Production (Render → PostgreSQL)
+#    DATABASES = {
+#        'default': dj_database_url.parse(DATABASE_URL)
+#    }
+#else:
+    # Local (SQLite)
+#    DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.sqlite3',
+#            'NAME': BASE_DIR / 'db.sqlite3',
+#        }
+#    }
 
 
 # Password validation
