@@ -23,43 +23,50 @@ def projet(request):
 @require_POST
 @csrf_exempt
 def subscribe(request):
-    email = request.POST.get('email', '').strip()
-    
-    if not email:
-        return JsonResponse({'success': False, 'message': 'Veuillez entrer une adresse email.'}, status=400)
-    
-    # Validate email format
-    import re
-    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    if not re.match(email_pattern, email):
-        return JsonResponse({'success': False, 'message': 'Veuillez entrer une adresse email valide.'}, status=400)
-    
-    # Check if email already exists
-    if Subscriber.objects.filter(email=email).exists():
-        return JsonResponse({'success': False, 'message': 'Cette adresse email est déjà abonnée.'}, status=400)
-    
-    # Create new subscriber
-    subscriber = Subscriber.objects.create(email=email)
-    
-    # Try to send confirmation email
     try:
-        # Check if email is configured
-        if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-            logger.warning("Email not configured - skipping confirmation email")
-            return JsonResponse({'success': True, 'message': 'Merci ! Votre abonnement a été confirmé (sans email de confirmation).'})
+        email = request.POST.get('email', '').strip()
         
-        send_mail(
-            subject='Abonnement à la Newsletter - Portfolio',
-            message=f'Bonjour,\n\nMerci de vous être abonné à ma newsletter ! Vous recevrez désormais des mises à jour sur mes nouveaux projets et actualités.\n\nCordialement,\nMEDONJIO TENANG JODEANAS',
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[email],
-            fail_silently=False,
-        )
-        return JsonResponse({'success': True, 'message': 'Merci ! Votre abonnement a été confirmé. Consultez votre email.'})
+        if not email:
+            return JsonResponse({'success': False, 'message': 'Veuillez entrer une adresse email.'}, status=400)
+        
+        # Validate email format
+        import re
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_pattern, email):
+            return JsonResponse({'success': False, 'message': 'Veuillez entrer une adresse email valide.'}, status=400)
+        
+        # Check if email already exists
+        if Subscriber.objects.filter(email=email).exists():
+            return JsonResponse({'success': False, 'message': 'Cette adresse email est déjà abonnée.'}, status=400)
+        
+        # Create new subscriber
+        subscriber = Subscriber.objects.create(email=email)
+        logger.info(f"Nouvel abonné créé: {email}")
+        
+        # Try to send confirmation email
+        try:
+            # Check if email is configured
+            if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
+                logger.warning("Email not configured - skipping confirmation email")
+                return JsonResponse({'success': True, 'message': 'Merci ! Votre abonnement a été confirmé (sans email de confirmation).'})
+            
+            send_mail(
+                subject='Abonnement à la Newsletter - Portfolio',
+                message=f'Bonjour,\n\nMerci de vous être abonné à ma newsletter ! Vous recevrez désormais des mises à jour sur mes nouveaux projets et actualités.\n\nCordialement,\nMEDONJIO TENANG JODEANAS',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+            logger.info(f"Email de confirmation envoyé à: {email}")
+            return JsonResponse({'success': True, 'message': 'Merci ! Votre abonnement a été confirmé. Consultez votre email.'})
+        except Exception as e:
+            logger.error(f"Email error: {str(e)}")
+            # Still return success since subscriber was created
+            return JsonResponse({'success': True, 'message': 'Abonnement créé ! (Email de confirmation non envoyé)'})
+            
     except Exception as e:
-        logger.error(f"Email error: {str(e)}")
-        # Still return success since subscriber was created
-        return JsonResponse({'success': True, 'message': 'Abonnement créé ! (Email de confirmation non envoyé)'})
+        logger.error(f"Erreur lors de l'abonnement: {str(e)}")
+        return JsonResponse({'success': False, 'message': 'Une erreur est survenue. Veuillez réessayer plus tard.'}, status=500)
 
 def contact(request):
     success = False
