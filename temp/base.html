@@ -209,7 +209,7 @@
             <div class="flex justify-between items-center h-full">
                 <!-- Logo -->
                 <a href="{% url 'index' %}" class="flex items-center space-x-2">
-                    <span class="text-xl font-bold gradient-text">Portfolio</span>
+                    <span class="text-xl font-bold gradient-text">Jodeanas</span>
                 </a>
                 
                 <!-- Desktop Navigation -->
@@ -258,6 +258,18 @@
     <main class="pt-16">
         {% block content %}{% endblock %}
     </main>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/237679590426" 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+       aria-label="Contacter sur WhatsApp">
+        <i class="fab fa-whatsapp text-white text-3xl group-hover:animate-pulse"></i>
+        <!-- Tooltip -->
+        <span class="absolute right-full mr-3 px-3 py-1 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Discuter sur WhatsApp
+        </span>
+    </a>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-300 border-t border-gray-800">
