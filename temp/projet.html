@@ -1,198 +1,228 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
 
+{% block title %}Projets{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projets</title>
-</head>
-<body>
-  {% block title %}Projets{% endblock %}
+{% block extra_css %}
+<style>
+    .project-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .project-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    
+    .project-card:hover .project-image {
+        transform: scale(1.05);
+    }
+    
+    .project-image {
+        transition: transform 0.4s ease;
+    }
+    
+    .skill-tag {
+        transition: all 0.3s ease;
+    }
+    
+    .skill-tag:hover {
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<nav class="fixed top-0 left-0 w-full bg-black bg-opacity-60 backdrop-blur-md z-50 py-4">
-    <div class="container mx-auto flex justify-between items-center px-6">
-      <h1 class="text-lg font-bold">Portfolio</h1>
-      <ul class="flex space-x-6 text-sm md:text-base">
-        
-        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
-        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
-        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
-        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
-        
-      </ul>
-    </div>
-  </nav>
-
-<section class="pt-32 pb-20 bg-gray-900 text-white min-h-screen">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-green-400">Mes Projets</h1>
-      <p class="text-gray-300 mt-4">Voici quelques projets que j’ai réalisés récemment avec passion.</p>
-    </div>
-
-    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Projet 1 -->
-      <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://images.unsplash.com/photo-1581091012184-4c4c1a1cd6c3?auto=format&fit=crop&w=800&q=80" alt="Projet 1" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-green-400 mb-2">Site vitrine personnel</h3>
-          <p class="text-gray-300 mb-4">Un site responsive réalisé avec Tailwind CSS pour présenter mon profil, mes compétences et mon parcours.</p>
-          <div class="flex flex-wrap gap-2 text-sm text-gray-200 mb-4">
-            <span class="bg-green-600 px-2 py-1 rounded">HTML</span>
-            <span class="bg-blue-600 px-2 py-1 rounded">Tailwind</span>
-            <span class="bg-gray-700 px-2 py-1 rounded">Django</span>
-          </div>
-          <a href="#" class="text-blue-400 hover:underline">Voir sur GitHub</a>
+<!-- Projects Section -->
+<section class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <span class="inline-flex items-center px-4 py-1.5 bg-green-500/20 border border-green-500/30 rounded-full text-sm font-medium text-green-400 mb-4">
+                <i class="fas fa-folder-open mr-2"></i>Portfolio
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+                Mes <span class="gradient-text">Projets</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Voici quelques projets que j'ai réalisés récemment avec passion et dedicación.
+            </p>
         </div>
-      </div>
 
-      <!-- Projet 2 -->
-      <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://images.unsplash.com/photo-1590608897129-79da98d159ab?auto=format&fit=crop&w=800&q=80" alt="Projet 2" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-green-400 mb-2">Application de gestion</h3>
-          <p class="text-gray-300 mb-4">Une application pour gérer des tâches, avec un tableau de bord et des filtres dynamiques.</p>
-          <div class="flex flex-wrap gap-2 text-sm text-gray-200 mb-4">
-            <span class="bg-purple-600 px-2 py-1 rounded">Python</span>
-            <span class="bg-red-600 px-2 py-1 rounded">SQLite</span>
-            <span class="bg-gray-700 px-2 py-1 rounded">Django</span>
-          </div>
-          <a href="#" class="text-blue-400 hover:underline">Voir sur GitHub</a>
-        </div>
-      </div>
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- ========== PROJETS STATIQUES ========== -->
+            
+            <!-- Project Card 1: Site de gestion de colis -->
+            <div class="project-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 backdrop-blur-sm">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80" 
+                         alt="Site de gestion de colis" 
+                         class="project-image w-full h-52 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-green-400 mb-2">Site de gestion de colis</h3>
+                    <p class="text-gray-300 mb-2 text-sm">
+                        <span class="px-2 py-1 bg-yellow-600/30 text-yellow-400 text-xs rounded">Projet personnel (en cours)</span>
+                    </p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        Développement d'une application web de suivi et gestion de colis avec authentification, gestion des statuts et historique.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Python</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Django</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">PostgreSQL</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">React</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Tailwind CSS</span>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Projet 3 -->
-      <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://images.unsplash.com/photo-1634746716578-b1b1d0fdf946?auto=format&fit=crop&w=800&q=80" alt="Projet 3" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-green-400 mb-2">Mini réseau social</h3>
-          <p class="text-gray-300 mb-4">Une plateforme simple avec système de connexion, publication et interaction.</p>
-          <div class="flex flex-wrap gap-2 text-sm text-gray-200 mb-4">
-            <span class="bg-yellow-600 px-2 py-1 rounded">Bootstrap</span>
-            <span class="bg-indigo-600 px-2 py-1 rounded">PostgreSQL</span>
-            <span class="bg-gray-700 px-2 py-1 rounded">Django</span>
-          </div>
-          <a href="#" class="text-blue-400 hover:underline">Voir la démo</a>
+            <!-- Project Card 2: Portfolio personnel -->
+            <div class="project-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 backdrop-blur-sm">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=80" 
+                         alt="Portfolio personnel" 
+                         class="project-image w-full h-52 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-green-400 mb-2">Portfolio personnel</h3>
+                    <p class="text-gray-300 mb-2 text-sm">
+                        <span class="px-2 py-1 bg-green-600/30 text-green-400 text-xs rounded">Projet personnel (terminé)</span>
+                    </p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        Création de mon site portfolio professionnel avec design responsive et moderne. Présentation de mes projets et compétences.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">HTML</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">CSS</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">JavaScript</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">React</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 3: Site de gestion de poulets de chair -->
+            <div class="project-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 backdrop-blur-sm">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=800&q=80" 
+                         alt="Site de gestion de poulets de chair" 
+                         class="project-image w-full h-52 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-green-400 mb-2">Site de gestion de poulets de chair</h3>
+                    <p class="text-gray-300 mb-2 text-sm">
+                        <span class="px-2 py-1 bg-yellow-600/30 text-yellow-400 text-xs rounded">Projet scolaire – Chef de projet (en cours)</span>
+                    </p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        Conception d'une application de gestion d'élevage avec suivi des stocks, alimentation, santé et ventes.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Django</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Laravel</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 4: Site de gestion des stocks -->
+            <div class="project-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 backdrop-blur-sm">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" 
+                         alt="Site de gestion des stocks" 
+                         class="project-image w-full h-52 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-green-400 mb-2">Site de gestion des stocks</h3>
+                    <p class="text-gray-300 mb-2 text-sm">
+                        <span class="px-2 py-1 bg-green-600/30 text-green-400 text-xs rounded">Projet scolaire – Chef de projet (terminé)</span>
+                    </p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        Développement d'un système de gestion de stock avec entrées/sorties, alertes de rupture et rapports.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Python</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Django</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">MySQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 5: Plateforme agro-alimentaire -->
+            <div class="project-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 backdrop-blur-sm">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80" 
+                         alt="Plateforme agro-alimentaire" 
+                         class="project-image w-full h-52 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-green-400 mb-2">Plateforme agro-alimentaire</h3>
+                    <p class="text-gray-300 mb-2 text-sm">
+                        <span class="px-2 py-1 bg-purple-600/30 text-purple-400 text-xs rounded">Projet d'équipe (phase d'analyse – en cours)</span>
+                    </p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        Conception d'une plateforme complète pour le secteur agro-alimentaire. Phase actuelle : analyse des besoins et cahier des charges.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Analyse</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">Conception</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== PROJETS DYNAMIQUES (depuis la base de données) ========== -->
+            {% load static %}
+            {% for projet in projets %}
+            <!-- Project Card Dynamic -->
+            <!-- Debug: {{ projet.image }} | {{ projet.image.url }} | {{ projet.image.name }} -->
+            <div class="project-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 backdrop-blur-sm">
+                <div class="overflow-hidden">
+                    {% if projet.image %}
+                    <img src="{{ projet.image.url }}" 
+                         alt="{{ projet.titre }}" 
+                         class="project-image w-full h-52 object-cover"
+                         onerror="console.log('Image failed:', this.src); this.onerror=null; this.src='https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=80'">
+                    {% else %}
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=80" 
+                         alt="{{ projet.titre }}" 
+                         class="project-image w-full h-52 object-cover">
+                    {% endif %}
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-green-400 mb-2">{{ projet.titre }}</h3>
+                    <p class="text-gray-300 mb-2 text-sm">
+                        {% if projet.etat == 'en_cours' %}
+                        <span class="px-2 py-1 bg-yellow-600/30 text-yellow-400 text-xs rounded">Projet personnel (en cours)</span>
+                        {% elif projet.etat == 'termine' %}
+                        <span class="px-2 py-1 bg-green-600/30 text-green-400 text-xs rounded">Projet personnel (terminé)</span>
+                        {% else %}
+                        <span class="px-2 py-1 bg-purple-600/30 text-purple-400 text-xs rounded">En analyse</span>
+                        {% endif %}
+                    </p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        {{ projet.description|truncatechars:150 }}
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {% with langages=projet.langages|split:"," %}
+                        {% for langage in langages %}
+                        <span class="skill-tag px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full">{{ langage.strip }}</span>
+                        {% endfor %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Message when no dynamic projects -->
+            {% endfor %}
         </div>
-      </div>
+
+        <!-- Call to Action -->
+        <div class="mt-16 text-center">
+            <p class="text-gray-400 mb-6">Vous avez un projet en tête ? Parlons-en !</p>
+            <a href="{% url 'contact' %}" class="inline-flex items-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Me contacter
+            </a>
+        </div>
     </div>
-  </div>
 </section>
-<footer class="bg-gray-800 text-gray-300 pt-12 pb-8">
-  <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-    
-    <!-- Colonne 1 : Nom + description -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">MEDONJIO TENANG JODEANAS</h2>
-      <p class="text-sm">
-        Développeur web passionné par la création d’expériences digitales modernes, performantes et intuitives. 
-        Basé à Bafoussam, je transforme des idées en produits concrets.
-      </p>
-    </div>
-
-    <!-- Colonne 2 : Contact -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">Contact</h2>
-      <ul class="space-y-2 text-sm">
-        <li class="flex items-center gap-2">
-          <i class="fas fa-map-marker-alt text-green-400"></i>
-          Banengo II, Bafoussam, Cameroun
-        </li>
-        <li class="flex items-center gap-2">
-          <i class="fas fa-envelope text-green-400"></i>
-          <a href="mailto:medonjiojoddeanas@gmail.com" class="hover:underline">medonjiojoddeanas@gmail.com</a>
-        </li>
-        <li class="flex items-center gap-2">
-          <i class="fas fa-phone text-green-400"></i>
-          <a href="tel:+237679590426" class="hover:underline">+237 679 590 426</a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Colonne 3 : Navigation -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">Navigation</h2>
-      <ul class="space-y-2 text-sm">
-        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition">Accueil</a></li>
-        <li><a href="{% url 'about' %}" class="hover:text-green-400 transition">À propos</a></li>
-        <li><a href="{% url 'projet' %}" class="hover:text-green-400 transition">Projets</a></li>
-        <li><a href="{% url 'contact' %}" class="hover:text-green-400 transition">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- Colonne 4 : Suivez-moi -->
-    <div>
-      <h2 class="text-xl font-bold text-white mb-4">Suivez-moi</h2>
-      <div class="flex space-x-4">
-        <a href="https://www.linkedin.com/in/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://twitter.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://facebook.com/tonprofil" target="_blank" class="hover:text-green-400 text-lg">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Bas du footer -->
-  <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-    &copy; 2025 MEDONJIO TENANG JODEANAS — Tous droits réservés.
-  </div>
-</footer>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in-up {
-      animation: fadeInUp 1.2s ease-out both;
-    }
-
-    .gradient-text {
-      background: linear-gradient(to right, #10B981, #3B82F6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .btn-animated {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-animated::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: skewX(-20deg);
-      transition: left 0.4s ease;
-    }
-
-    .btn-animated:hover::after {
-      left: 100%;
-    }
-  </style>
 {% endblock %}
-</body>
-</html>
